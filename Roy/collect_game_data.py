@@ -1,8 +1,9 @@
 import requests
-import config
+import Roy.config as config
 from bs4 import BeautifulSoup
 import regex as re
 import datetime
+import json
 
 
 def clean_key(key):
@@ -87,6 +88,9 @@ if __name__ == '__main__':
     soup = BeautifulSoup(page.content)
     # print(soup.prettify())
 
+    #game sku
+    game_sku = int(soup.find(class_="layout").attrs["card-product"])
+
     # Game name
     game_title = soup.find('h1').text
     game_score = float(soup.find(class_="rating productcard-rating__score").text[:3])
@@ -96,4 +100,4 @@ if __name__ == '__main__':
     game_price_discount = round((float(game_price_base) - float(game_price_final)) / float(game_price_base), 2)
     # Game details
     game_details_dict = game_details(soup)
-    print(game_title, game_score, game_price_base, game_price_final, game_price_discount, game_details_dict)
+    print(game_sku, game_title, game_score, game_price_base, game_price_final, game_price_discount, game_details_dict)
