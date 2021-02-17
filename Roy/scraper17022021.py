@@ -180,7 +180,7 @@ def get_pages():
             for elem in elems:
                 href = elem.get_attribute('href')
                 if href is not None and href.startswith("https://www.gog.com/game/"):
-                    print(href)
+                    print(href) #todo: delete after we finish
                     game_urls.append(href)
             index += 1
         except StaleElementReferenceException:
