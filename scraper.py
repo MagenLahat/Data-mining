@@ -9,7 +9,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import StaleElementReferenceException
 from time import sleep
-
+import os
 
 # import json
 
@@ -92,7 +92,7 @@ def game_details(soup):
 
 def get_pages():
 
-    driver = webdriver.Chrome(conf.PATH)
+    driver = webdriver.Chrome(os.getcwd() + '/chromedriver')
     index = 1
     game_urls = []
     while index:
@@ -112,10 +112,15 @@ def get_pages():
                     game_urls.append(href)
             index += 1
         except StaleElementReferenceException:
-            print(f'stale element reference raised for page {index}, skipping page.')
-            driver.quit()
+            print(f'stale element reference raised for page {index}, skipping page...')
             sleep(10)
             index += 1
+
+        except ConnectionRefusedError:
+            print(f'connection refused error raised {index}, skipping page...')
+            sleep(10)
+            index += 1
+    driver.quit()
     return game_urls
 
 

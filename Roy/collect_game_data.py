@@ -82,10 +82,14 @@ def game_details(soup):
     return array
 
 
+
+
 if __name__ == '__main__':
+
+
     page = requests.get(config.divinity_game_example)
 
-    soup = BeautifulSoup(page.content)
+    soup = BeautifulSoup(page.content,)
     # print(soup.prettify())
 
     #game sku
