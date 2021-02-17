@@ -75,7 +75,7 @@ def game_details(soup):
     array = dict()
     for row in soup.find_all("div", {"class": "details__content table__row-content"}):
         key = clean_key(row.previous_element)
-        if key not in config.relevant_keys:
+        if key not in conf.relevant_keys:
             continue
         if key == 'genre':
             value = game_gnere_cleaner(row)
@@ -110,10 +110,10 @@ def game_title(soup):
 
 def game_score(soup):
     """Returns the game score of of 5 (highest)"""
-    # TODO: maybe the seperator isn't a good way for all cases
-    game_score = soup.find(class_="rating productcard-rating__score").text
-    game_score = re.search(r'(\d{1}\.?\d?)/', game_score).group().replace(r'/','')
-    if game_score is None:
+    try:
+        game_score = soup.find(class_="rating productcard-rating__score").text
+        game_score = float(re.search(r'(\d{1}\.?\d?)/', game_score).group().replace(r'/',''))
+    except AttributeError:
         return 'NULL'
     return game_score
 
@@ -124,6 +124,7 @@ def game_price_base(soup):
     if game_price_base is None:
         return "NULL"
     return game_price_base
+
 
 def game_price_final(soup):
     """Returns the game prices"""
@@ -153,14 +154,57 @@ def master_page_scrapper(page):
     game_sql['game_price_discount'] = game_price_discount(game_sql['game_price_base'], game_sql['game_price_final'])
     # Game details
     game_details_dict = game_details(soup)
+    game_sql['game_url'] = page.url
     game_sql = {**game_sql, **game_details_dict}
     return game_sql
 
 
+def get_pages():
+    driver = webdriver.Chrome(os.getcwd() + '/chromedriver')
+    index = 1
+    game_urls = []
+    while index:
+        # todo: remove after finish
+        # if index == 2:
+        #     break
+
+        driver.get(conf.gog_url_partial + str(index))
+        if index > 1 and driver.current_url == conf.gog_url:  # if it returns to the first page finish
+            break
+        try:
+            element = WebDriverWait(driver, 10).until(  # wait until the element is loaded
+                EC.presence_of_all_elements_located((By.TAG_NAME, "a")))
+            # common selenium exception for items that were not loaded on time
+            elems = driver.find_elements_by_tag_name('a')
+            # sleep(10)
+            for elem in elems:
+                href = elem.get_attribute('href')
+                if href is not None and href.startswith("https://www.gog.com/game/"):
+                    print(href)
+                    game_urls.append(href)
+            index += 1
+        except StaleElementReferenceException:
+            print(f'stale element reference raised for page {index}, skipping page...')
+            sleep(10)
+            index += 1
+
+        except ConnectionRefusedError:
+            print(f'connection refused error raised {index}, skipping page...')
+            sleep(10)
+            index += 1
+    driver.quit()
+    return game_urls
+
+
 if __name__ == '__main__':
-    page = requests.get(config.divinity_game_example)
-    game_data = master_page_scrapper(page)
-    print(game_data)
+
+    for page in get_pages():
+    # for page in ["https://www.gog.com/game/new_super_luckys_tale"]:
+        rs = requests.get(page)
+
+        game_data = master_page_scrapper(rs)
+
+        print(game_data)
 
 
 
