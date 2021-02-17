@@ -181,9 +181,10 @@ def game_price_discount(game_price_base, game_price_final):
     else:
         return round((float(game_price_base) - float(game_price_final)) / float(game_price_base), 2)
 
+
 def check_game_page_url_response(game_page_url):
     """Verify game page url response"""
-    if game_page_url.text != 200:
+    if game_page_url.status_code != 200:
         return False
     else:
         return True
@@ -194,7 +195,6 @@ def master_page_scrapper(game_page_url):
     Returns ALL the available data from the game's page url.
     :param game_page_url: Response object (requests library)
     :return: game_sql(dict) with all the game info.
-
     """
     game_sql = {}  # The data of the game
 
@@ -267,11 +267,12 @@ if __name__ == '__main__':
         try:
             rs = requests.get(page)
             game_data = master_page_scrapper(rs)
+            print(game_data)
 
         except Exception as ex_message:
             print(ex_message)
 
-        print(game_data)
+
 
 
 
