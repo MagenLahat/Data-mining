@@ -31,11 +31,13 @@ def works_on_cleaner(row):
     works_on = row.text.lower().strip()
     return works_on
 
+
 def release_date_cleaner(row):
     """Returns game release date"""
     release_date = re.search(r'\d{4}-\d{2}-\d{2}', row.text).group()
     release_date = datetime.datetime.strptime(release_date, '%Y-%m-%d')
     return release_date
+
 
 def company_cleaner(row):
     company = row.text.lower()
@@ -44,6 +46,7 @@ def company_cleaner(row):
     for idx, comp in enumerate(company):
         company[idx] = comp.strip()
     return company
+
 
 def size_cleaner_and_converter(row):
     """Returns the size of the game in MB(float)"""
@@ -82,26 +85,77 @@ def game_details(soup):
     return array
 
 
+def game_sku(soup):
+    """Returns the game SKU else returns null"""
+    # game sku
+    game_sku = int(soup.find(class_="layout").attrs["card-product"])
+    if game_sku is None:
+        return 'NULL'
+    return game_sku
+
+
+def game_title(soup):
+    """Returns the game title else returns null"""
+    game_title = soup.find('h1').text
+    if game_title is None:
+        return 'NULL'
+    return game_title
+
+
+def game_score(soup):
+    """Returns the game score of of 5 (highest)"""
+    # TODO: maybe the seperator isn't a good way for all cases
+    game_score = soup.find(class_="rating productcard-rating__score").text
+    game_score = re.search(r'(\d{1}\.?\d?)/', game_score).group().replace(r'/','')
+    if game_score is None:
+        return 'NULL'
+    return game_score
+
+
+def game_price_base(soup):
+    """Returns the game prices"""
+    game_price_base = float(soup.find("span", {"class": "product-actions-price__base-amount _price"}).text)
+    if game_price_base is None:
+        return "NULL"
+    return game_price_base
+
+def game_price_final(soup):
+    """Returns the game prices"""
+    game_price_final = float(soup.find("span", {"class": "product-actions-price__final-amount _price"}).text)
+    if game_price_final is None:
+        return "NULL"
+    return game_price_final
+
+
+def game_price_discount(game_price_base, game_price_final):
+    """Returns the discount of the game. If no discount returns zero"""
+    no_discount = 0
+    if game_price_base == game_price_final or game_price_base == 'NULL' or game_price_final == 'NULL':
+        return no_discount
+    else:
+        return round((float(game_price_base) - float(game_price_final)) / float(game_price_base), 2)
+
+
+def master_page_scrapper(page):
+    soup = BeautifulSoup(page.content, features="lxml")
+    game_sql = {} # The data of the game
+    game_sql['game_sku'] = game_sku(soup)
+    game_sql['game_title'] = game_title(soup)
+    game_sql['game_score'] = game_score(soup)
+    game_sql['game_price_base'] = game_price_base(soup)
+    game_sql['game_price_final'] = game_price_final(soup)
+    game_sql['game_price_discount'] = game_price_discount(game_sql['game_price_base'], game_sql['game_price_final'])
+    # Game details
+    game_details_dict = game_details(soup)
+    game_sql = {**game_sql, **game_details_dict}
+    return game_sql
 
 
 if __name__ == '__main__':
-
-
     page = requests.get(config.divinity_game_example)
+    game_data = master_page_scrapper(page)
+    print(game_data)
 
-    soup = BeautifulSoup(page.content,)
-    # print(soup.prettify())
 
-    #game sku
-    game_sku = int(soup.find(class_="layout").attrs["card-product"])
 
-    # Game name
-    game_title = soup.find('h1').text
-    game_score = float(soup.find(class_="rating productcard-rating__score").text[:3])
-    # Prices
-    game_price_base = float(soup.find("span", {"class": "product-actions-price__base-amount _price"}).text)
-    game_price_final = float(soup.find("span", {"class": "product-actions-price__final-amount _price"}).text)
-    game_price_discount = round((float(game_price_base) - float(game_price_final)) / float(game_price_base), 2)
-    # Game details
-    game_details_dict = game_details(soup)
-    print(game_sku, game_title, game_score, game_price_base, game_price_final, game_price_discount, game_details_dict)
+
