@@ -114,7 +114,7 @@ def get_pages():
         except StaleElementReferenceException:
             print(f'stale element reference raised for page {index}, skipping page...')
             sleep(10)
-            index += 1
+
 
         except ConnectionRefusedError:
             print(f'connection refused error raised {index}, skipping page...')
