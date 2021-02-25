@@ -1,5 +1,8 @@
-# TODO: HEADLINE
-""""""
+"""
+Project: Data-Mining GOG (Good Old Games)
+Sub-file of game_scrapper.py
+Retrieve Additional Details (different section on the game page)
+"""
 import config
 import re
 import datetime
@@ -11,27 +14,26 @@ def __clean_key(key):
     try:
         key_cleaner = str(key)
         key_cleaner = key_cleaner.lower()
-        key_cleaner = re.sub(r'[:]', '', key_cleaner.strip())
-        if re.match(r'\w+ \w+', key_cleaner):
+        key_cleaner = re.sub(config.PUNCTUATION_MARK, config.EMPTY_STRING, key_cleaner.strip())
+        if re.match(config.WORD_REGEX, key_cleaner):
             # adding underscore between two words (for SQL columns' names)
-            key_cleaner = re.sub(' ', '_', key_cleaner)
+            key_cleaner = re.sub(config.SPACE_STRING, config.UNDERLINE, key_cleaner)
     except:
-        return "NULL"
+        return config.NULL_VALUE
     return key_cleaner
 
 
 #  Game Details
 def __game_genre_cleaner(row):
     """Returns the game genre"""
-    new_line_regex = r'[\n]'
     try:
         game_genre = row.text.strip()
-        game_genre = re.sub(new_line_regex, '', game_genre)
-        game_genre = game_genre.split(' - ')
+        game_genre = re.sub(config.NEW_LINE, config.EMPTY_STRING, game_genre)
+        game_genre = game_genre.split(config.LINE_SPACED)
         for idx, game in enumerate(game_genre):
             game_genre[idx] = game.strip()
     except:
-        return "NULL"
+        return config.NULL_VALUE
     return game_genre
 
 
@@ -40,18 +42,17 @@ def __works_on_cleaner(row):
     try:
         works_on = row.text.lower().strip()
     except:
-        return 'NULL'
+        return config.NULL_VALUE
     return works_on
 
 
 def __release_date_cleaner(row):
     """Returns the game's release date YYYY-mm-dd (datetime)"""
-    datetime_regex = r'\d{4}-\d{2}-\d{2}'
     try:
-        release_date = re.search(datetime_regex, row.text).group()
-        release_date = datetime.datetime.strptime(release_date, '%Y-%m-%d')
+        release_date = re.search(config.DATETIME_REGEX, row.text).group()
+        release_date = datetime.datetime.strptime(release_date, config.DATE_FORMAT)
     except:
-        return "NULL"
+        return config.NULL_VALUE
     return release_date
 
 
@@ -59,31 +60,30 @@ def __game_developers_cleaner(row):
     """Returns the game's developers & publisher names (list)"""
     try:
         company = row.text.lower()
-        company = re.sub(r'[\n]', '', company)
-        company = company.split(r'/')
+        company = re.sub(config.NEW_LINE, config.EMPTY_STRING, company)
+        company = company.split(config.SLASH)
         for idx, comp in enumerate(company):
             company[idx] = comp.strip()
     except:
-        return ['NULL']
+        return [config.NULL_VALUE]
     return company
 
 
 def size_cleaner_and_converter(row):
-    """Returns the size of the game in MB(float)"""
-    to_mb_scale = 1000
+    """Returns the game_size_original of the game in MB(float)"""
     try:
-        size = row.text.lower()
-        size = re.sub(r'[\n]', '', size)
-        size = size.strip()
-        size_digits = float(size[:size.find(' ')])
-        size_scale = size[size.find(' ')+1:]
-        if size_scale == 'gb':
-            size_digits *= to_mb_scale
-        elif size_scale == 'kb':
-            size_digits /= to_mb_scale
+        game_size_original = row.text.lower()
+        game_size_original = re.sub(config.NEW_LINE, config.EMPTY_STRING, game_size_original)
+        game_size_original = game_size_original.strip()
+        game_size_converted = float(game_size_original[:game_size_original.find(config.SPACE_STRING)])
+        size_scale = game_size_original[game_size_original.find(' ') + 1:]
+        if size_scale == config.GAME_IN_GB_SIZE:
+            game_size_converted *= config.TO_MB_SCALE
+        elif size_scale == config.GAME_IN_KB_SIZE:
+            game_size_converted /= config.TO_MB_SCALE
     except:
-        return "NULL"
-    return size_digits
+        return config.NULL_VALUE
+    return game_size_converted
 
 
 def game_details(soup):
@@ -92,19 +92,19 @@ def game_details(soup):
      Returns: game_details_section (dictionary)
      """
     game_details_section = dict()
-    for row in soup.find_all("div", {"class": "details__content table__row-content"}):
+    for row in soup.find_all(config.DIV_TAG, {config.CLASS_TAG: config.game_details_text}):
         key = __clean_key(row.previous_element)
-        if key not in config.relevant_keys:
+        if key not in config.game_keys:
             continue
-        if key == 'genre':
+        if key == config.keyname_genre:
             value = __game_genre_cleaner(row)
-        elif key == 'works_on':
+        elif key == config.keyname_works_on:
             value = __works_on_cleaner(row)
-        elif key == 'release_date':
+        elif key == config.keyname_release_date:
             value = __release_date_cleaner(row)
-        elif key == 'company':
+        elif key == config.keyname_company:
             value = __game_developers_cleaner(row)
-        elif key == 'size':
+        elif key == config.keyname_game_size:
             value = size_cleaner_and_converter(row)
         game_details_section[key] = value
     return game_details_section

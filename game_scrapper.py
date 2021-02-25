@@ -1,11 +1,12 @@
-# TODO: HEADLINE
-""""""
+"""
+Project: Data-Mining GOG (Good Old Games)
+Game Scrapper File
+"""
 from import_game_details import game_details
 from import_game_data import game_data
+from bs4 import BeautifulSoup
 import config
 
-
-from bs4 import BeautifulSoup
 
 def game_page_scrapper(game_page_url):
     """
@@ -13,7 +14,7 @@ def game_page_scrapper(game_page_url):
     :param game_page_url: Response object (requests library)
     :return: game_sql(dict) with all the game info.
     """
-    soup = BeautifulSoup(game_page_url.content, features="lxml")
+    soup = BeautifulSoup(game_page_url.content, features=config.BEAUTIFUL_SOUP_FEATURE)
     # Game data section
     game_data_dict = game_data(game_page_url, soup)
 

@@ -1,12 +1,10 @@
-# TODO: HEADLINE
-"""Data mining project - Roy and Magen
 """
-
-
+Project: Data-Mining GOG (Good Old Games)u
+Students: Roy and Magen
+Main File - Please run this file to start the script
+"""
 import grequests
 import config
-
-# todo:new files
 from game_scrapper import game_page_scrapper
 from import_urls import get_game_urls
 
