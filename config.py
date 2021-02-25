@@ -7,8 +7,13 @@ relevant_keys = ['genre', 'works_on', 'release_date', 'company', 'size']
 BATCH_SIZE = 10
 
 # TODO: IMPORT_URLS CONSTANTS
- # comment
 
+chromedriver = '/chromedriver'
+ten_seconds = 10
+main_tag = "a"
+href = 'href'
+games_startswith = "https://www.gog.com/game/"
+first_page_index = 1
 # TODO: GAME_SCRAPPER CONSTANTS
 
 
