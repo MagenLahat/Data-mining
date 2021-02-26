@@ -16,9 +16,7 @@ def get_game_urls(gog_url):
     Goes through the website pages and fetch all game urls
     :return: a list of all games urls
     """
-
-    # driver = webdriver.Chrome(os.getcwd() + config.chromedriver)
-    driver = webdriver.Chrome(os.path.join(os.getcwd(),config.CHROMEDRIVER_NAME))
+    driver = webdriver.Chrome(os.path.join(os.getcwd(), config.CHROMEDRIVER_NAME))
     index = config.first_page_index
     game_urls = []
     while index:
