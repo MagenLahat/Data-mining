@@ -1,20 +1,16 @@
-beautifulsoup4 @ file:///home/conda/feedstock_root/build_artifacts/beautifulsoup4_1601745390275/work
-brotlipy==0.7.0
+beautifulsoup4==4.9.3
+bs4==0.0.1
 certifi==2020.12.5
-cffi @ file:///tmp/build/80754af9/cffi_1613246945912/work
-chardet @ file:///home/conda/feedstock_root/build_artifacts/chardet_1610093490430/work
-cryptography==2.9.2
-gevent @ file:///tmp/build/80754af9/gevent_1610995009582/work
-greenlet @ file:///tmp/build/80754af9/greenlet_1611957705398/work
+cffi==1.14.5
+chardet==4.0.0
+gevent==21.1.2
+greenlet==1.0.0
 grequests==0.6.0
-idna @ file:///home/conda/feedstock_root/build_artifacts/idna_1593328102638/work
-pycparser @ file:///tmp/build/80754af9/pycparser_1594388511720/work
-pyOpenSSL==19.1.0
-PySocks @ file:///home/conda/feedstock_root/build_artifacts/pysocks_1610291447907/work
-requests @ file:///home/conda/feedstock_root/build_artifacts/requests_1608156231189/work
-selenium @ file:///home/conda/feedstock_root/build_artifacts/selenium_1602632393611/work
-six @ file:///home/conda/feedstock_root/build_artifacts/six_1590081179328/work
-soupsieve @ file:///home/conda/feedstock_root/build_artifacts/soupsieve_1597680516047/work
-urllib3 @ file:///home/conda/feedstock_root/build_artifacts/urllib3_1611695416663/work
+idna==2.10
+pycparser==2.20
+requests==2.25.1
+selenium==3.141.0
+soupsieve==2.2
+urllib3==1.26.3
 zope.event==4.5.0
-zope.interface @ file:///tmp/build/80754af9/zope.interface_1606940259012/work
+zope.interface==5.2.0
