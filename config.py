@@ -14,6 +14,7 @@ gog_url = "https://www.gog.com/games?sort=popularity&page=1"
 gog_url_partial = "https://www.gog.com/games?sort=popularity&page="
 
 # IMPORT_URLS CONSTANTS
+CHROMEDRIVER_NAME = 'chromedriver'
 BATCH_SIZE = 10
 TEN_SECONDS = 10
 main_tag = "a"
