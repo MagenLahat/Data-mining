@@ -1,6 +1,6 @@
 # DATA MINING PROJECT
 Data mining project - Roy and Magen
-#DESCRIPTION
+# DESCRIPTION
 In this project so far, we chose to scrape the website GOG.com (https://www.gog.com/).
 GOG.com is a digital distribution platform – an online store with a curated selection of games,
 an optional gaming client giving you freedom of choice, 
@@ -29,7 +29,8 @@ works_on (supported operating systems) - i.e. macOS/Windows/Linux etc...,
 release_date - The game release data,
 
 company - List of development & publishers of the game.
-#INSTALLATION AND SUPPORT
+
+# INSTALLATION AND SUPPORT
 To Scrap the site, we had to use several external libraries, such as bs4 and Selenium. 
 You can find all the required libraries in the added requirements.txt file.
 To run the script on your local machine, please install those libraries.
@@ -52,7 +53,8 @@ Therefore:
 Attention: In some cases, it requires downloading few versions until you find the correct one. 
 By default, we left chromedriver.exe, which compatible with Win 64 & Chrome 88.0.4324.190. Make sure you replace it with your chromedriver.
  
-#INSTRUCTIONS
+# INSTRUCTIONS
+
 In order to start the scrapping work, please run the main.py file using Python. The chrome browser will pop out until
 all the pages will be collected. Please don't touch the computer at that time, since it can hurt the process
 of Selenium. There are over 98 pages in GOG. Therefore it can take some time.
@@ -65,7 +67,7 @@ From time to time, we print which pages aren't scrapped.
 After we finished collecting all games' URLs, you'll start to see how the script is printing to
  stdout each game's detail in a row. 
 
-#PROJECT FILES MODULES
+# PROJECT FILES MODULES
 main.py - calls the import URLs module, gets all the game URLs, and uses grequest to get the responses concurrently
  in batches. Each response is sent to game_page_scrapper.py, which prints the game data into stdout. 
 
@@ -80,10 +82,10 @@ import_game_data.py - Merging general data with game details
 
 config.py - contains constants, key strings, and URLs.
 
-#GIT HUB REPOSITORY
+# GIT HUB REPOSITORY
 https://github.com/MagenLahat/Data-mining.git
 
-#CONTACT FOR SUPPORT
+# CONTACT FOR SUPPORT
 magat261@gmail.com
 
 roy.toled@gmail.com
