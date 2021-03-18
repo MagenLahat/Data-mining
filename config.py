@@ -11,7 +11,10 @@ NEW_LINE = r'[\n]'
 LINE_SPACED = " - "
 SLASH_STRING = r'/'
 gog_url = "https://www.gog.com/games?sort=popularity&page=1"
-gog_url_partial = "https://www.gog.com/games?sort=popularity&page="
+ROOT_TAG = 'https://www.gog.com/games?sort=rating'
+PRICE_TAG = '&price='
+TAB_TAG = '&tab='
+PAGE_TAG = '&page='
 
 # IMPORT_URLS CONSTANTS
 CHROMEDRIVER_NAME = 'chromedriver'
