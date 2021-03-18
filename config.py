@@ -3,7 +3,7 @@ Project: Data-Mining GOG (Good Old Games)
 Config File - Contains all the CONSTANTS AND SETUPS for the whole project
 """
 # General
-NULL_VALUE = "NULL"
+NULL_VALUE = None
 EMPTY_STRING = ""
 SPACE_STRING = " "
 UNDERLINE = "_"
@@ -57,9 +57,16 @@ keyname_release_date = 'release_date'
 keyname_company = 'company'
 keyname_game_size = 'size'
 game_keys = [keyname_genre, keyname_works_on, keyname_release_date, keyname_company, keyname_game_size]
-datetime_regex = r'\d{4}-\d{2}-\d{2}'
+DATETIME_REGEX = r'\d{4}-\d{2}-\d{2}'
 TO_MB_SCALE = 1000
-game_in_gb_size = "gb"
-game_in_kb_size = "kb"
+GAME_IN_GB_SIZE = "gb"
+GAME_IN_KB_SIZE = "kb"
 game_details_text = "details__content table__row-content"
-date_format = '%Y-%m-%d'
+DATE_FORMAT = '%Y-%m-%d'
+DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S'
+
+# MySQL Connection
+MYSQL_DATABASE = "gog_scrapper_db"
+MYSQL_HOST = "127.0.0.1"
+MYSQL_USER = "root"
+MYSQL_PASSWORD = "itc12345" # todo: delete password of mysql

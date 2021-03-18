@@ -12,7 +12,7 @@ def __game_sku(soup):
     # game sku
     try:
         game_sku = int(soup.find(class_=config.game_sku_find_class).attrs[config.game_sku_find_attr])
-    except:
+    except Exception:
         # if game_sku is None
         return config.NULL_VALUE
     return game_sku
@@ -26,7 +26,7 @@ def __game_title(soup):
     """
     try:
         game_title = soup.find(config.game_title_find_tag).text
-    except:
+    except Exception:
         # if game_title is None
         return config.NULL_VALUE
     return game_title

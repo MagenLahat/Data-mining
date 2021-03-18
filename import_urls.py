@@ -20,6 +20,8 @@ def get_game_urls(gog_url):
     index = config.first_page_index
     game_urls = []
     while index:
+        if index == 2:  # todo: to delete at the end.
+            break
 
         driver.get(gog_url + str(index))
         if index > config.first_page_index and driver.current_url == config.gog_url:  # if it returns to the first

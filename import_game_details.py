@@ -61,7 +61,7 @@ def __game_developers_cleaner(row):
     try:
         company = row.text.lower()
         company = re.sub(config.NEW_LINE, config.EMPTY_STRING, company)
-        company = company.split(config.SLASH)
+        company = company.split(config.SLASH_STRING)
         for idx, comp in enumerate(company):
             company[idx] = comp.strip()
     except:
@@ -69,7 +69,7 @@ def __game_developers_cleaner(row):
     return company
 
 
-def size_cleaner_and_converter(row):
+def __game_size_cleaner_and_converter(row):
     """Returns the game_size_original of the game in MB(float)"""
     try:
         game_size_original = row.text.lower()
@@ -91,7 +91,7 @@ def game_details(soup):
      in order to parse and clean the Game details section
      Returns: game_details_section (dictionary)
      """
-    game_details_section = dict()
+    game_details_section = {key_index: config.NULL_VALUE for key_index in config.game_keys}  # Create dict with None values.
     for row in soup.find_all(config.DIV_TAG, {config.CLASS_TAG: config.game_details_text}):
         key = __clean_key(row.previous_element)
         if key not in config.game_keys:
@@ -105,6 +105,6 @@ def game_details(soup):
         elif key == config.keyname_company:
             value = __game_developers_cleaner(row)
         elif key == config.keyname_game_size:
-            value = size_cleaner_and_converter(row)
+            value = __game_size_cleaner_and_converter(row)
         game_details_section[key] = value
     return game_details_section
