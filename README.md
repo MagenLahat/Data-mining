@@ -146,9 +146,9 @@ After we finished collecting all games' URL, you'll start to see how the script 
 
 **game_scrapper.py -** Returns ALL the available data from the game's page URL. 
 
-​	**import_game_details.py -** Contains all the functions that scrape the data, uses bs4.
+**import_game_details.py -** Contains all the functions that scrape the data, uses bs4.
 
-​	**import_game_data.py -** Merging general data with game details
+**import_game_data.py -** Merging general data with game details
 
 **mysql_writer** - Contains WebsiteDB class. This class is responsible for writing the scrapper into DB.
 
