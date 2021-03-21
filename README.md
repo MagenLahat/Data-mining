@@ -1,6 +1,6 @@
 # Data Mining Project - Good Old Games
 Data mining project - Roy and Magen
-# Description
+## Description
 In this project so far, we chose to scrape the website GOG.com (https://www.gog.com/).
 GOG.com is a digital distribution platform – an Online store with a curated selection of games,
 an optional gaming client giving you freedom of choice, 
@@ -31,7 +31,7 @@ and a vivid community of gamers.
 - company - List of development & publishers of the game.
 
 
-# Repository Prerequisites
+## Repository Prerequisites
 ### **Python Libraries**
 To Scrap the site, we had to use several external libraries, such as bs4 and Selenium. 
 You can find all the required libraries in the added requirements.txt file.
@@ -73,7 +73,7 @@ the MySQL DB. We recommend to work with MySQL version 8.0 due to Syntax, Stabili
 
 Please verify that you have proper user with writing privileges, and you remember the user name and the password of that account (we will use it in the Instructions part).
 
-###### Database ERD Diagram: GOG_SCRAPPER_DB
+#### Database ERD Diagram: GOG_SCRAPPER_DB
 
 ​	![alt text](https://i.ibb.co/8jVCm5J/ERD-Diagram.png)
 
@@ -85,11 +85,11 @@ Please verify that you have proper user with writing privileges, and you remembe
 3. game_genres - Each game can contain up to 3 rows of genres.
 4. game_scores - Each row contains th quote of the game score for the Python running date.
 
-###### Why we use "quote" in the Prices & Scores tables?
+#### Why we use "quote" in the Prices & Scores tables?
 
 ​	In order to Analyze the prices and popularity overtime, we would like to save script's previous results.
 
-###### Creating the Scrapper DB
+#### Creating the Scrapper DB
 
 ​	Our scrapper can print into screen, write into DB or both (for further info please read the Cli help).
 ​	In order to establish the writing into DB it's mandatory to **create the DB**. 
@@ -99,7 +99,7 @@ Please verify that you have proper user with writing privileges, and you remembe
 
 ​	After running the script, you can use the query "use databases;" to verify that the DB successfully loaded.
 
-###### Configure your MySQL credentials into the Script
+#### Configure your MySQL credentials into the Script
 
 ​	Only on the first time, you must configure some variables in order to establish protected connection 
 ​	between Python and MySQL:
@@ -114,7 +114,7 @@ Please verify that you have proper user with writing privileges, and you remembe
 
 ​	Please install the Python connector:  https://dev.mysql.com/downloads/connector/python/
 
-###### Known issue with MySQL connector 
+#### Known issue with MySQL connector 
 
 ​	If after the first run the of the Python Script you get the following error: 
 
@@ -125,7 +125,7 @@ Please verify that you have proper user with writing privileges, and you remembe
 
 ​	
 
-# Running the Python Script
+## Running the Python Script
 
 In order to start the scrapping work, please run the main.py file using Python. The chrome browser will pop out until
 all the pages will be collected. Please don't touch the computer at that time, since it can hurt the process
@@ -139,7 +139,7 @@ From time to time, we print which pages aren't scrapped.
 After we finished collecting all games' URL, you'll start to see how the script is printing to
  stdout each game's detail in a row. 
 
-# PROJECT FILES MODULES & CLASSES
+## PROJECT FILES MODULES & CLASSES
 **main.py** - calls the import URL module, gets all the game URL, and uses grequest to get the responses concurrently in batches. Each response is sent to game_page_scrapper.py, which prints the game data into stdout. 
 
 **import_urls.py** - goes through the website pages and parses all game URL, returns a list of all games URL.
@@ -154,10 +154,10 @@ After we finished collecting all games' URL, you'll start to see how the script 
 
 **config.py** - contains constants, key strings, and URL.
 
-# GIT HUB REPOSITORY
+## GIT HUB REPOSITORY
 https://github.com/MagenLahat/Data-mining.git
 
-# CONTACT FOR SUPPORT
+## CONTACT FOR SUPPORT
 magat261@gmail.com
 
 roy.toled@gmail.com
