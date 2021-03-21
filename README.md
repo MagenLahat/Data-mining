@@ -74,14 +74,15 @@ Please verify that you have proper user with writing privileges, and you remembe
 
 ​	<u>Database ERD Diagram:</u> GOG_SCRAPPER_DB
 
-​	![https://drive.google.com/file/d/1mfj7fhhwabIT2qWsJ-MaVFgRhPdV3mdT/view?usp=sharing]()
+![https://ibb.co/FBtrhw9]()
 
 ​	The DB includes 4 different tables:
 
-		1. game_titles - The main table. Each row includes unique about each game.
-		2. game_prices - Each row contains the quote of the game price for the Python running date.
-		3. game_genres - Each game can contain up to 3 rows of genres.
-		4. game_scores - Each row contains th quote of the game score for the Python running date.
+1. game_titles - The main table. Each row includes unique about each game.
+
+2. game_prices - Each row contains the quote of the game price for the Python running date.
+3. game_genres - Each game can contain up to 3 rows of genres.
+4. game_scores - Each row contains th quote of the game score for the Python running date.
 
 
 ​	<u>Why we use "quote" in the Prices & Scores tables?</u>
@@ -103,9 +104,9 @@ Please verify that you have proper user with writing privileges, and you remembe
 ​	Only on the first time, you must configure some variables in order to establish protected connection 
 ​	between Python and MySQL:
 
- 	1. Open the config.py file.
- 	2. Change "mysql_user" value into your MySQL user-name.
- 	3. Change "mysql_password" value into your MySQL password.
+1. Open the config.py file.
+2. Change "mysql_user" value into your MySQL user-name.
+3. Change "mysql_password" value into your MySQL password.
 
 ​	<u>Install MySQL - Python connector</u>
 
