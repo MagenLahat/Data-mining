@@ -42,15 +42,15 @@ if __name__ == '__main__':
                     #                 {'game_title': 'Grim Dawn', 'game_sku': 1449651388, 'game_score': 4.5, 'game_price_base': 24.99, 'game_price_final': 6.24, 'game_price_discount': 0.75, 'game_url': 'https://www.gog.com/game/grim_dawn', 'genre': ['Action', 'Role-playing', 'Fantasy'], 'works_on': 'windows (7, 8, 10)', 'release_date': '2010-10-10', 'company': ['crate entertainment', 'crate entertainment'], 'size': 3600.0}]
 
                     # todo: writing to sql
-                    if args.choice == 'db' or args.choice == 'both':
-                        try:
-                            with WebsiteDB(list_of_games_dict) as db:
-                                db.write_game_titles()
-                                db.write_game_genres()
-                                db.write_game_prices()
-                                db.write_game_scores()
-                        except Exception as ex_message:
-                            print(ex_message)
+                if args.choice == 'db' or args.choice == 'both':
+                    try:
+                        with WebsiteDB(list_of_games_dict) as db:
+                            db.write_game_titles()
+                            db.write_game_genres()
+                            db.write_game_prices()
+                            db.write_game_scores()
+                    except Exception as ex_message:
+                        print(ex_message)
 
             url_batch.clear()
 
