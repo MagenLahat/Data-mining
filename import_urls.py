@@ -9,6 +9,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
 import os
 import config
+from bs4 import BeautifulSoup
+import requests
 
 
 def get_game_urls(gog_url):
@@ -16,6 +18,7 @@ def get_game_urls(gog_url):
     Goes through the website pages and fetch all game urls
     :return: a list of all games urls
     """
+
     driver = webdriver.Chrome(os.path.join(os.getcwd(), config.CHROMEDRIVER_NAME))
     index = config.first_page_index
     game_urls = []
@@ -23,12 +26,14 @@ def get_game_urls(gog_url):
         # if index == 2:  # todo: to delete at the end.
         #     break
 
+        list_length = len(game_urls)
         driver.get(gog_url + str(index))
         if index > config.first_page_index and driver.current_url == config.gog_url:  # if it returns to the first
             # page finish
             break
+
         try:
-            elms = WebDriverWait(driver, config.TEN_SECONDS).until\
+            elms = WebDriverWait(driver, config.TEN_SECONDS).until \
                 (EC.presence_of_all_elements_located((By.TAG_NAME, config.main_tag)))
             for elem in elms:
                 href = elem.get_attribute(config.href)
@@ -44,5 +49,8 @@ def get_game_urls(gog_url):
             print(f'connection refused error raised {index}, skipping page...')
             sleep(config.TEN_SECONDS)
             index += 1
+        list(set(game_urls))
+        if len(game_urls) - list_length < 5:
+            break
     driver.quit()
     return list(set(game_urls))
