@@ -69,7 +69,7 @@ DATE_FORMAT = '%Y-%m-%d'
 DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 
 # MySQL Connection
-MYSQL_DATABASE = "gog_scrapper_db"
-MYSQL_HOST = "127.0.0.1"
+MYSQL_DATABASE = "GOG_SCRAPPER_DB"
+MYSQL_HOST = "localhost"
 MYSQL_USER = "root"
 MYSQL_PASSWORD = "password" # todo: delete password of mysql
