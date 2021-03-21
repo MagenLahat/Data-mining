@@ -19,13 +19,25 @@ class WebsiteDB:
     def __exit__(self, exception_type, exception_value, exception_traceback):
         self.close()
 
-    def __connect_to_db(self, config):
-        return mysql.connector.connect(
-            host=config.MYSQL_HOST,
-            user=config.MYSQL_USER,
-            password=config.MYSQL_PASSWORD,
-            database=config.MYSQL_DATABASE
-        )
+    def __connect_to_db(self, config_file):
+        """Returns mysql connector object. In order to create the connection,
+            the method contains very sensitive data.
+        """
+        if config_file.mysql_native_authentication:
+            return mysql.connector.connect(
+                host=config_file.MYSQL_HOST,
+                user=config_file.mysql_user,
+                password=config_file.mysql_password,
+                database=config_file.MYSQL_DATABASE,
+                auth_plugin=config_file.MYSQL_AUTH
+            )
+        else:
+            return mysql.connector.connect(
+                host=config_file.MYSQL_HOST,
+                user=config_file.mysql_user,
+                password=config_file.mysql_password,
+                database=config_file.MYSQL_DATABASE
+            )
 
     @property
     def connection(self):
@@ -64,13 +76,13 @@ class WebsiteDB:
                             title_size_mb = VALUES(title_size_mb),
                             title_url = VALUES(title_url)
                         """
-                val = (dicto[config.keyname_game_sku],
-                       dicto[config.keyname_game_title],
-                       dicto[config.keyname_release_date],
-                       dicto[config.keyname_works_on],
-                       ', '.join(set(dicto[config.keyname_company])),
-                       dicto[config.keyname_game_size],
-                       dicto[config.keyname_game_url])
+                val = (dicto[config.KEYNAME_GAME_SKU],
+                       dicto[config.KEYNAME_GAME_TITLE],
+                       dicto[config.KEYNAME_RELEASE_DATE],
+                       dicto[config.KEYNAME_WORKS_ON],
+                       ', '.join(set(dicto[config.KEYNAME_COMPANY])),
+                       dicto[config.KEYNAME_GAME_SIZE],
+                       dicto[config.KEYNAME_GAME_URL])
                 self.cursor.execute(sql, val)
             except Exception:
                 pass
@@ -80,14 +92,14 @@ class WebsiteDB:
         Each game could have at 3 different types of genres => each one in a row
         """
         for dicto in self._data:  # todo: change dicto name
-            for genere_name in dicto[config.keyname_genre]:
+            for genere_name in dicto[config.KEYNAME_GENRE]:
                 try:
                     sql = """INSERT INTO game_genres (title_sku, genre_name) VALUES(%s,%s) 
                              ON DUPLICATE KEY UPDATE 
                                 genre_name = VALUES(genre_name)             
                             """
                     val = (
-                    dicto[config.keyname_game_sku], genere_name)
+                        dicto[config.KEYNAME_GAME_SKU], genere_name)
                     self.cursor.execute(sql, val)
                 except Exception:
                     pass
@@ -104,11 +116,11 @@ class WebsiteDB:
                              discount) 
                         VALUES(%s,%s,%s,%s,%s)           
                         """
-                val = (dicto[config.keyname_game_sku],
+                val = (dicto[config.KEYNAME_GAME_SKU],
                        datetime.now().strftime(config.DATETIME_FORMAT),
-                       dicto[config.keyname_game_base_price],
-                       dicto[config.keyname_gmae_final_price],
-                       dicto[config.keyname_game_discount]
+                       dicto[config.KEYNAME_GAME_BASE_PRICE],
+                       dicto[config.KEYNAME_GMAE_FINAL_PRICE],
+                       dicto[config.KEYNAME_GAME_DISCOUNT]
                        )
                 self.cursor.execute(sql, val)
             except Exception:
@@ -126,9 +138,9 @@ class WebsiteDB:
                              score)
                         VALUES(%s,%s,%s)           
                         """
-                val = (dicto[config.keyname_game_sku],
+                val = (dicto[config.KEYNAME_GAME_SKU],
                        datetime.now().strftime(config.DATETIME_FORMAT),
-                       dicto[config.keyname_game_score]
+                       dicto[config.KEYNAME_GAME_SCORE]
                        )
                 self.cursor.execute(sql, val)
             except Exception:

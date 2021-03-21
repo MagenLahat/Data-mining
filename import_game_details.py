@@ -24,7 +24,7 @@ def __clean_key(key):
 
 
 #  Game Details
-def __game_genre_cleaner(row):
+def __get_game_genre(row):
     """Returns the game genre"""
     try:
         game_genre = row.text.strip()
@@ -37,7 +37,7 @@ def __game_genre_cleaner(row):
     return game_genre
 
 
-def __works_on_cleaner(row):
+def __get_game_supported_os(row):
     """Returns on which OSs' the game is working"""
     try:
         works_on = row.text.lower().strip()
@@ -46,7 +46,7 @@ def __works_on_cleaner(row):
     return works_on
 
 
-def __release_date_cleaner(row):
+def __get_game_release_date(row):
     """Returns the game's release date YYYY-mm-dd (datetime)"""
     try:
         release_date = re.search(config.DATETIME_REGEX, row.text).group()
@@ -56,7 +56,7 @@ def __release_date_cleaner(row):
     return release_date
 
 
-def __game_developers_cleaner(row):
+def __get_game_publisher(row):
     """Returns the game's developers & publisher names (list)"""
     try:
         company = row.text.lower()
@@ -69,7 +69,7 @@ def __game_developers_cleaner(row):
     return company
 
 
-def __game_size_cleaner_and_converter(row):
+def __get_game_size_in_mb(row):
     """Returns the game_size_original of the game in MB(float)"""
     try:
         game_size_original = row.text.lower()
@@ -86,25 +86,25 @@ def __game_size_cleaner_and_converter(row):
     return game_size_converted
 
 
-def game_details(soup):
+def get_game_details(soup):
     """Calling the other functions (above)
      in order to parse and clean the Game details section
      Returns: game_details_section (dictionary)
      """
-    game_details_section = {key_index: config.NULL_VALUE for key_index in config.game_keys}  # Create dict with None values.
+    game_details_section = {key_index: config.NULL_VALUE for key_index in config.GAME_KEYS}  # Create dict with None values.
     for row in soup.find_all(config.DIV_TAG, {config.CLASS_TAG: config.game_details_text}):
         key = __clean_key(row.previous_element)
-        if key not in config.game_keys:
+        if key not in config.GAME_KEYS:
             continue
-        if key == config.keyname_genre:
-            value = __game_genre_cleaner(row)
-        elif key == config.keyname_works_on:
-            value = __works_on_cleaner(row)
-        elif key == config.keyname_release_date:
-            value = __release_date_cleaner(row)
-        elif key == config.keyname_company:
-            value = __game_developers_cleaner(row)
-        elif key == config.keyname_game_size:
-            value = __game_size_cleaner_and_converter(row)
+        if key == config.KEYNAME_GENRE:
+            value = __get_game_genre(row)
+        elif key == config.KEYNAME_WORKS_ON:
+            value = __get_game_supported_os(row)
+        elif key == config.KEYNAME_RELEASE_DATE:
+            value = __get_game_release_date(row)
+        elif key == config.KEYNAME_COMPANY:
+            value = __get_game_publisher(row)
+        elif key == config.KEYNAME_GAME_SIZE:
+            value = __get_game_size_in_mb(row)
         game_details_section[key] = value
     return game_details_section
