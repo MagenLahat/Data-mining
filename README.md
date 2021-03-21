@@ -59,7 +59,7 @@ Therefore:
 5. The zip file contains a file called chromedriver.
     (!) which needs to be added to the folder of the main script.
 
-    ? - **chromedriver** responsible for the automation and communication between the python script and the browser itself. 
+     **chromedriver** - responsible for the automation and communication between the python script and the browser itself. 
 
     **<u>Attention:</u>** In some cases, it requires downloading few versions until you find the correct one. 
     By default, we left chromedriver.exe, which compatible with Win 64 & Chrome 88.0.4324.190. Make sure you replace it with your chromedriver.
@@ -74,15 +74,15 @@ Please verify that you have proper user with writing privileges, and you remembe
 
 ​	<u>Database ERD Diagram:</u> GOG_SCRAPPER_DB
 
-​	![](/home/roy/Data-mining/MySQL/ERD Diagram.png)
+​	![https://drive.google.com/file/d/1mfj7fhhwabIT2qWsJ-MaVFgRhPdV3mdT/view?usp=sharing]()
 
 ​	The DB includes 4 different tables:
 
 		1. game_titles - The main table. Each row includes unique about each game.
-  		2. game_prices - Each row contains the quote of the game price for the Python running date.
-  		3. game_genres - Each game can contain up to 3 rows of genres.
-  		4. game_scores - Each row contains th quote of the game score for the Python running date.
-       
+		2. game_prices - Each row contains the quote of the game price for the Python running date.
+		3. game_genres - Each game can contain up to 3 rows of genres.
+		4. game_scores - Each row contains th quote of the game score for the Python running date.
+
 
 ​	<u>Why we use "quote" in the Prices & Scores tables?</u>
 
