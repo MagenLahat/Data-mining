@@ -31,14 +31,14 @@ and a vivid community of gamers.
 
 
 # Repository Prerequisites
-<u>Python Libraries</u>
+**<u>Python Libraries</u>**
 To Scrap the site, we had to use several external libraries, such as bs4 and Selenium. 
 You can find all the required libraries in the added requirements.txt file.
 To run the script on your local machine, please install those libraries.
 
 
 
-<u>Troubleshooting Selenium Webdriver</u>
+**<u>Troubleshooting Selenium Webdriver</u>**
 After installing those libraries, we suggest focusing on "selenium webdriver". 
 
 Selenium can work with different browsers. 																											We decided to go on with the most popular today, Google Chrome. 
@@ -66,7 +66,7 @@ Therefore:
 
 
 
-<u>Troubleshooting MySQL</u>
+**<u>Troubleshooting MySQL DB</u>**
 In order to save the results into MySQL DB, please verify that your local machine runs proper instance of
 the MySQL DB. We recommend to work with MySQL version 8.0 due to Syntax, Stability and Security reasons.
 
@@ -74,7 +74,7 @@ Please verify that you have proper user with writing privileges, and you remembe
 
 ​	<u>Database ERD Diagram:</u> GOG_SCRAPPER_DB
 
-![https://i.ibb.co/8jVCm5J/ERD-Diagram.png]()
+​	![alt text](https://i.ibb.co/8jVCm5J/ERD-Diagram.png)
 
 ​	The DB includes 4 different tables:
 
@@ -104,9 +104,11 @@ Please verify that you have proper user with writing privileges, and you remembe
 ​	Only on the first time, you must configure some variables in order to establish protected connection 
 ​	between Python and MySQL:
 
-1. Open the config.py file.
-2. Change "mysql_user" value into your MySQL user-name.
-3. Change "mysql_password" value into your MySQL password.
+​			1. Open the config.py file.
+
+​			2. Change "mysql_user" value into your MySQL user-name.
+
+​			3. Change "mysql_password" value into your MySQL password.
 
 ​	<u>Install MySQL - Python connector</u>
 
