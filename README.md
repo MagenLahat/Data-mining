@@ -74,7 +74,7 @@ Please verify that you have proper user with writing privileges, and you remembe
 
 ​	<u>Database ERD Diagram:</u> GOG_SCRAPPER_DB
 
-![https://ibb.co/FBtrhw9]()
+![https://i.ibb.co/8jVCm5J/ERD-Diagram.png]()
 
 ​	The DB includes 4 different tables:
 
