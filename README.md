@@ -43,7 +43,7 @@ GOG scrapping for the given data:
 ***''a25'***' - games sold with price above 25 usd
 ***''free'***' - games that are free to download    
 **default** - no price filter
-
+  
 **-c**: users uotput choice: 
 ***'screen'***' -  print the results to the screen (default)
 ***''db'***' - write the results to the Data-Bae
