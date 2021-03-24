@@ -35,7 +35,7 @@ GOG scrapping for the given data:
 ### **CLI**
 **-m**: selects whether to scrape through: 
 
-** 'everything' ** - every game for sale in the website (default)
+**'everything'** - every game for sale in the website (default)
 
 **'on_sale' ** - games that are on a temporary discount
 
@@ -53,11 +53,11 @@ GOG scrapping for the given data:
 
 **-c**: users choice:
 
-***'screen'*** - print the results to the screen (default)
+**'screen'** - print the results to the screen (default)
 
 **'db'** - write the results to the Data-Bae
 
-** 'both'  **- print the results to the screen and write them to the Data-Bae
+**'both'** - print the results to the screen and write them to the Data-Bae
 
 ### **CLI examples:**
 
