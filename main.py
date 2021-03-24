@@ -3,7 +3,6 @@ Project: Data-Mining GOG (Good Old Games)u
 Students: Roy and Magen
 Main File - Please run this file to start the script
 """
-# todo: update requirements before hand-in.
 # todo: functions type hint
 # todo: update md5 documentation - cli.
 # todo: md5 using typora / smooth markdown.
@@ -16,7 +15,7 @@ from mysql_writer import WebsiteDB
 
 if __name__ == '__main__':
 
-    list_of_games_dict = []
+    list_of_games_dict = []  # list of all batches into MySQL
     gog_url_partial, args = arguments_parser.filter_args()
 
     url_batch = []  # list of urls for grequests
@@ -32,11 +31,9 @@ if __name__ == '__main__':
                     if args.choice == 'screen' or args.choice == 'both':
                         print(game_data)
 
-                    list_of_games_dict.append(game_data)  # todo: for sql purpose
+                    list_of_games_dict.append(game_data)
                 except Exception as ex_message:
                     print(ex_message)
-
-
 
             if args.choice == 'db' or args.choice == 'both':
                 try:
@@ -49,8 +46,3 @@ if __name__ == '__main__':
                     print(ex_message)
             list_of_games_dict.clear()
             url_batch.clear()
-
-
-
-
-

@@ -1,12 +1,13 @@
 # Data Mining Project - Good Old Games
 Data mining project - Roy and Magen
+
 ## Description
 In this project so far, we chose to scrape the website GOG.com (https://www.gog.com/).
 GOG.com is a digital distribution platform – an Online store with a curated selection of games,
 an optional gaming client giving you freedom of choice, 
 and a vivid community of gamers.
 
-<u>GOG scrapping for the given data:</u>
+GOG scrapping for the given data:
 
 - game_title - The game title.
 

@@ -57,7 +57,7 @@ class WebsiteDB:
 
     def write_game_titles(self):
         """Writes to title table"""
-        for dicto in self._data:  # todo: change dicto name
+        for game_title_dict in self._data:
             try:
                 sql = """INSERT INTO game_titles
                              (  title_sku,
@@ -76,13 +76,13 @@ class WebsiteDB:
                             title_size_mb = VALUES(title_size_mb),
                             title_url = VALUES(title_url)
                         """
-                val = (dicto[config.KEYNAME_GAME_SKU],
-                       dicto[config.KEYNAME_GAME_TITLE],
-                       dicto[config.KEYNAME_RELEASE_DATE],
-                       dicto[config.KEYNAME_WORKS_ON],
-                       ', '.join(set(dicto[config.KEYNAME_COMPANY])),
-                       dicto[config.KEYNAME_GAME_SIZE],
-                       dicto[config.KEYNAME_GAME_URL])
+                val = (game_title_dict[config.KEYNAME_GAME_SKU],
+                       game_title_dict[config.KEYNAME_GAME_TITLE],
+                       game_title_dict[config.KEYNAME_RELEASE_DATE],
+                       game_title_dict[config.KEYNAME_WORKS_ON],
+                       ', '.join(set(game_title_dict[config.KEYNAME_COMPANY])),
+                       game_title_dict[config.KEYNAME_GAME_SIZE],
+                       game_title_dict[config.KEYNAME_GAME_URL])
                 self.cursor.execute(sql, val)
             except Exception:
                 pass
@@ -91,22 +91,22 @@ class WebsiteDB:
         """Write into game_genres the genres of the game.
         Each game could have at 3 different types of genres => each one in a row
         """
-        for dicto in self._data:  # todo: change dicto name
-            for genere_name in dicto[config.KEYNAME_GENRE]:
+        for game_genres_dict in self._data:
+            for genere_name in game_genres_dict[config.KEYNAME_GENRE]:
                 try:
                     sql = """INSERT INTO game_genres (title_sku, genre_name) VALUES(%s,%s) 
                              ON DUPLICATE KEY UPDATE 
                                 genre_name = VALUES(genre_name)             
                             """
                     val = (
-                        dicto[config.KEYNAME_GAME_SKU], genere_name)
+                        game_genres_dict[config.KEYNAME_GAME_SKU], genere_name)
                     self.cursor.execute(sql, val)
                 except Exception:
                     pass
 
     def write_game_prices(self):
         """Writes to game_prices"""
-        for dicto in self._data:  # todo: change dicto name
+        for game_prices_dict in self._data:
             try:
                 sql = """INSERT INTO game_prices
                              (title_sku, 
@@ -116,11 +116,11 @@ class WebsiteDB:
                              discount) 
                         VALUES(%s,%s,%s,%s,%s)           
                         """
-                val = (dicto[config.KEYNAME_GAME_SKU],
+                val = (game_prices_dict[config.KEYNAME_GAME_SKU],
                        datetime.now().strftime(config.DATETIME_FORMAT),
-                       dicto[config.KEYNAME_GAME_BASE_PRICE],
-                       dicto[config.KEYNAME_GMAE_FINAL_PRICE],
-                       dicto[config.KEYNAME_GAME_DISCOUNT]
+                       game_prices_dict[config.KEYNAME_GAME_BASE_PRICE],
+                       game_prices_dict[config.KEYNAME_GMAE_FINAL_PRICE],
+                       game_prices_dict[config.KEYNAME_GAME_DISCOUNT]
                        )
                 self.cursor.execute(sql, val)
             except Exception:
@@ -130,7 +130,7 @@ class WebsiteDB:
         """Writes into game_scores tbl (sql db).
            Each row is a quote of the score for the script running time.
         """
-        for dicto in self._data:  # todo: change dicto name
+        for game_scores_dict in self._data:
             try:
                 sql = """INSERT INTO game_scores
                              (title_sku, 
@@ -138,9 +138,9 @@ class WebsiteDB:
                              score)
                         VALUES(%s,%s,%s)           
                         """
-                val = (dicto[config.KEYNAME_GAME_SKU],
+                val = (game_scores_dict[config.KEYNAME_GAME_SKU],
                        datetime.now().strftime(config.DATETIME_FORMAT),
-                       dicto[config.KEYNAME_GAME_SCORE]
+                       game_scores_dict[config.KEYNAME_GAME_SCORE]
                        )
                 self.cursor.execute(sql, val)
             except Exception:
