@@ -34,6 +34,7 @@ GOG scrapping for the given data:
 
 ### **CLI**
 **arguments**: -m, -p, -c
+
 **-m**: selects whether to scrape through: 
 
 -----------**'everything'** - every game for sale in the website (default)
