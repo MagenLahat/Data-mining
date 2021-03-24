@@ -30,7 +30,9 @@ GOG scrapping for the given data:
 - release_date - The game release data.
 
 - company - List of development & publishers of the game.
-###CLI
+
+
+### **CLI**
 -m: selects whether to scrape through  'everything' - every game for sale in the website (default)
                                        'on_sale' - games that are on a temporary discount
                                        'new' - games that were recently released
@@ -44,7 +46,9 @@ GOG scrapping for the given data:
                   'db' - write the results to the Data-Bae
                   'both' - print the results to the screen and write them to the Data-Bae
 
-CLI examples: <python3 main.py -m new -p u10 -c both> -> new games under 10 usd, prints both to screen and writes to
+CLI examples:
+  
+  <python3 main.py -m new -p u10 -c both> -> new games under 10 usd, prints both to screen and writes to
                                                          the Data-Base
 
   <python3 main.py -c both>  -> scrapes through all games with no price filter, prints results to the screen
