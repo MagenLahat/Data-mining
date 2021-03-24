@@ -30,7 +30,7 @@ GOG scrapping for the given data:
 - release_date - The game release data.
 
 - company - List of development & publishers of the game.
-
+    
 
 ### **CLI**
 **-m:** selects whether to scrape through:
