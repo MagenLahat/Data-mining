@@ -59,7 +59,7 @@ GOG scrapping for the given data:
 
 ***'both' ***- print the results to the screen and write them to the Data-Bae
 
-###**CLI examples:**
+### **CLI examples:**
 
 <python3 main.py -m new -p u10 -c both> -> new games under 10 usd, prints both to screen and writes to the Data-Base
 
