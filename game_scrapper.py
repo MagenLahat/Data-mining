@@ -2,8 +2,8 @@
 Project: Data-Mining GOG (Good Old Games)
 Game Scrapper File
 """
-from import_game_details import game_details
-from import_game_data import game_data
+from import_game_details import get_game_details
+from import_game_data import get_game_data
 from bs4 import BeautifulSoup
 import config
 
@@ -16,10 +16,10 @@ def game_page_scrapper(game_page_url):
     """
     soup = BeautifulSoup(game_page_url.content, features=config.BEAUTIFUL_SOUP_FEATURE)
     # Game data section
-    game_data_dict = game_data(game_page_url, soup)
+    game_data_dict = get_game_data(game_page_url, soup)
 
     # Game details section
-    game_details_dict = game_details(soup)
+    game_details_dict = get_game_details(soup)
 
     # Merging general data with game details section
     game_sql = {**game_data_dict, **game_details_dict}

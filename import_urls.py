@@ -20,24 +20,22 @@ def get_game_urls(gog_url):
     """
 
     driver = webdriver.Chrome(os.path.join(os.getcwd(), config.CHROMEDRIVER_NAME))
-    index = config.first_page_index
+    index = config.FIRST_PAGE_INDEX
     game_urls = []
     while index:
-        # if index == 2:  # todo: to delete at the end.
-        #     break
 
         list_length = len(game_urls)
         driver.get(gog_url + str(index))
-        if index > config.first_page_index and driver.current_url == config.gog_url:  # if it returns to the first
+        if index > config.FIRST_PAGE_INDEX and driver.current_url == config.GOG_URL:  # if it returns to the first
             # page finish
             break
 
         try:
             elms = WebDriverWait(driver, config.TEN_SECONDS).until \
-                (EC.presence_of_all_elements_located((By.TAG_NAME, config.main_tag)))
+                (EC.presence_of_all_elements_located((By.TAG_NAME, config.MAIN_TAG)))
             for elem in elms:
-                href = elem.get_attribute(config.href)
-                if href is not None and href.startswith(config.games_url_path):
+                href = elem.get_attribute(config.HREF)
+                if href is not None and href.startswith(config.GAMES_URL_PATH):
                     game_urls.append(href)
             index += 1
         except EC.StaleElementReferenceException:
