@@ -35,29 +35,29 @@ GOG scrapping for the given data:
 ### **CLI**
 **-m**: selects whether to scrape through: 
 
-*** 'everything'*** - every game for sale in the website (default)
+** 'everything' ** - every game for sale in the website (default)
 
-***'on_sale'*** - games that are on a temporary discount
+**'on_sale' ** - games that are on a temporary discount
 
-***'new'*** - games that were recently released
+**'new'** - games that were recently released
 
 **-p**: price filter: 
 
-***'u5***',*** 'u10'***,*** 'u15'***:  corresponds to games sold with prices under 5,10,15 usd
+**'u5**',** 'u10'**,** 'u15'** :  corresponds to games sold with prices under 5,10,15 usd
 
-***'a25'*** - games sold with price above 25 usd
+**'a25'** - games sold with price above 25 usd
 
-***'free'*** - games that are free to download
+**'free'** - games that are free to download
 
-***default*** - no price filter
+**default** - no price filter
 
 **-c**: users choice:
 
 ***'screen'*** - print the results to the screen (default)
 
-***'db'*** - write the results to the Data-Bae
+**'db'** - write the results to the Data-Bae
 
-***'both' ***- print the results to the screen and write them to the Data-Bae
+** 'both'  **- print the results to the screen and write them to the Data-Bae
 
 ### **CLI examples:**
 
