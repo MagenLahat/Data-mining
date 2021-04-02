@@ -3,9 +3,7 @@ Project: Data-Mining GOG (Good Old Games)u
 Students: Roy and Magen
 Main File - Please run this file to start the script
 """
-# todo: functions type hint
-# todo: update md5 documentation - cli.
-# todo: md5 using typora / smooth markdown.
+
 import arguments_parser
 import grequests
 import config

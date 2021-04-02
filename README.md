@@ -166,7 +166,7 @@ Please verify that you have proper user with writing privileges, and you remembe
 
 ## Running the Python Script
 
-In order to start the scrapping work, please run the main.py file using Python. The chrome browser will pop out until
+In order to start the scrapping work, please run the main.py file using Python(please see CLI commands section). The chrome browser will pop out until
 all the pages will be collected. Please don't touch the computer at that time, since it can hurt the process
 of Selenium. There are over 98 pages in GOG. Therefore it can take some time.
 So you're asking why it's taking so long?
@@ -192,6 +192,8 @@ After we finished collecting all games' URL, you'll start to see how the script 
 **mysql_writer** - Contains WebsiteDB class. This class is responsible for writing the scrapper into DB.
 
 **config.py** - contains constants, key strings, and URL.
+
+**arguments_parser.py **-parser arguments fro CLI to filter and direct the program.
 
 ## GIT HUB REPOSITORY
 https://github.com/MagenLahat/Data-mining.git
