@@ -193,7 +193,7 @@ After we finished collecting all games' URL, you'll start to see how the script 
 
 **config.py** - contains constants, key strings, and URL.
 
-**arguments_parser.py **-parser arguments fro CLI to filter and direct the program.
+**arguments_parser.py** - parser arguments fro CLI to filter and direct the program.
 
 ## GIT HUB REPOSITORY
 https://github.com/MagenLahat/Data-mining.git
