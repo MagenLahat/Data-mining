@@ -24,6 +24,9 @@ def get_game_urls(gog_url):
     game_urls = []
     while index:
 
+        if index == 3:
+            break
+
         list_length = len(game_urls)
         driver.get(gog_url + str(index))
         if index > config.FIRST_PAGE_INDEX and driver.current_url == config.GOG_URL:  # if it returns to the first

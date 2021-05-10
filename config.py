@@ -68,11 +68,15 @@ game_details_text = "details__content table__row-content"
 DATE_FORMAT = '%Y-%m-%d'
 DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 
-# MySQL Connection Constants
+# mysql_data_mining Connection Constants
 MYSQL_DATABASE = "GOG_SCRAPPER_DB"
 MYSQL_HOST = "localhost"
 MYSQL_AUTH = 'mysql_native_password'
-# MySQL Connection Variables
+# mysql_data_mining Connection Variables
 mysql_user = "root"
-mysql_password = "password"
+mysql_password = "itc12345"
 mysql_native_authentication = False
+
+# Twitch API
+API_CLIENT_ID = "honcjjterpsdgqkmbja3a1688oqnvp"
+API_CLIENT_SECRET = "8qmn61l90ny1k1nb2ujwtl9qujgvlt"

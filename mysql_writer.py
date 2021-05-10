@@ -1,17 +1,19 @@
 """
 Project: Data-Mining GOG (Good Old Games)
-MySQL CLASS - inserting and updating results into DB.
+mysql_data_mining CLASS - inserting and updating results into DB.
 """
 import mysql.connector
 import config
 from datetime import datetime
-
+import re
 
 class WebsiteDB:
-    def __init__(self, list_of_games_data):
+    def __init__(self, list_of_games_data=[]):
+
         self._data = list_of_games_data
         self._conn = self.__connect_to_db(config)
         self._cursor = self._conn.cursor()
+        # self.__justself.__create_new_db_if_not_exists()
 
     def __enter__(self):
         return self
@@ -28,7 +30,7 @@ class WebsiteDB:
                 host=config_file.MYSQL_HOST,
                 user=config_file.mysql_user,
                 password=config_file.mysql_password,
-                database=config_file.MYSQL_DATABASE,
+                # database=config_file.MYSQL_DATABASE,
                 auth_plugin=config_file.MYSQL_AUTH
             )
         else:
@@ -36,7 +38,7 @@ class WebsiteDB:
                 host=config_file.MYSQL_HOST,
                 user=config_file.mysql_user,
                 password=config_file.mysql_password,
-                database=config_file.MYSQL_DATABASE
+                # database=config_file.MYSQL_DATABASE
             )
 
     @property
@@ -55,21 +57,60 @@ class WebsiteDB:
             self.commit()
         self.connection.close()
 
+    # def __create_new_db_if_not_exists(self):
+    #     """
+    #     Create if not exists all the DB.
+    #     """
+    #     for line in open("create_db_GOG.sql"):
+    #         self.cursor.execute(line, multi=True)
+
+    def write_custom_query(self, query):
+        """Writes custom query to the database (mysql)"""
+        try:
+            self.cursor.execute(query)
+        except Exception:
+            pass
+
+    def write_twitch_standings(self, list_of_dict):
+        """Writes custom query to the database (mysql)"""
+        """Writes to title table"""
+        for game in list_of_dict:
+            try:
+                sql = f"""INSERT INTO gog_scrapper_db.twitch_rankings
+                                     (id, name, clean_name, Standings)
+                                      VALUES(%s, %s, %s, %s)
+                                """
+                val = (game["id"], game["name"], self.__clean_game_title(game["name"]), game["Standings"])
+                self.cursor.execute(sql, val)
+                self.commit()
+            except Exception:
+                pass
+
+    def __clean_game_title(self, game):
+        game = re.sub(":", "", game)
+        if len(game.split()) > 1:
+            v_game = game.split()
+            return v_game[0]+" "+v_game[1]
+        else:
+            return game
+
     def write_game_titles(self):
         """Writes to title table"""
         for game_title_dict in self._data:
             try:
-                sql = """INSERT INTO game_titles
+                sql = """INSERT INTO gog_scrapper_db.game_titles
                              (  title_sku,
                                 title_name,
+                                clean_title_name, 
                                 title_release_date,
                                 title_supported_os,
                                 title_company,
                                 title_size_mb,
                                 title_url)
-                              VALUES(%s,%s,%s,%s,%s,%s,%s)
+                              VALUES(%s,%s,%s,%s,%s,%s,%s,%s)
                         ON DUPLICATE KEY UPDATE
                             title_name = VALUES(title_name),
+                            clean_title_name = VALUES(clean_title_name),
                             title_release_date = VALUES(title_release_date),
                             title_supported_os = VALUES(title_supported_os),
                             title_company = VALUES(title_company),
@@ -77,7 +118,8 @@ class WebsiteDB:
                             title_url = VALUES(title_url)
                         """
                 val = (game_title_dict[config.KEYNAME_GAME_SKU],
-                       game_title_dict[config.KEYNAME_GAME_TITLE],
+                       str.lower(game_title_dict[config.KEYNAME_GAME_TITLE]),
+                       self.__clean_game_title(str.lower(game_title_dict[config.KEYNAME_GAME_TITLE])),
                        game_title_dict[config.KEYNAME_RELEASE_DATE],
                        game_title_dict[config.KEYNAME_WORKS_ON],
                        ', '.join(set(game_title_dict[config.KEYNAME_COMPANY])),
@@ -94,7 +136,9 @@ class WebsiteDB:
         for game_genres_dict in self._data:
             for genere_name in game_genres_dict[config.KEYNAME_GENRE]:
                 try:
-                    sql = """INSERT INTO game_genres (title_sku, genre_name) VALUES(%s,%s) 
+                    sql = """INSERT INTO 
+                            gog_scrapper_db.game_genres(title_sku, genre_name)
+                            VALUES(%s,%s) 
                              ON DUPLICATE KEY UPDATE 
                                 genre_name = VALUES(genre_name)             
                             """
@@ -108,7 +152,7 @@ class WebsiteDB:
         """Writes to game_prices"""
         for game_prices_dict in self._data:
             try:
-                sql = """INSERT INTO game_prices
+                sql = """INSERT INTO gog_scrapper_db.game_prices
                              (title_sku, 
                              price_quote_datetime, 
                              price_base, 
@@ -132,7 +176,7 @@ class WebsiteDB:
         """
         for game_scores_dict in self._data:
             try:
-                sql = """INSERT INTO game_scores
+                sql = """INSERT INTO gog_scrapper_db.game_scores
                              (title_sku, 
                              score_quote_datetime,
                              score)
@@ -145,4 +189,3 @@ class WebsiteDB:
                 self.cursor.execute(sql, val)
             except Exception:
                 pass
-

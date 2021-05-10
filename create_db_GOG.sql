@@ -20,13 +20,14 @@ USE `GOG_SCRAPPER_DB` ;
 CREATE TABLE IF NOT EXISTS `GOG_SCRAPPER_DB`.`game_titles` (
   `title_sku` BIGINT NOT NULL,
   `title_name` VARCHAR(255) NOT NULL,
+  `clean_title_name` VARCHAR(255) NOT NULL,
   `title_release_date` DATE NULL,
   `title_supported_os` VARCHAR(512) NULL,
   `title_company` VARCHAR(255) NULL,
   `title_size_mb` DECIMAL NULL,
   `title_url` VARCHAR(512) NULL,
   PRIMARY KEY (`title_sku`))
-ENGINE = InnoDB;
+ENGINE = myisam;
 
 
 -- -----------------------------------------------------
@@ -44,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `GOG_SCRAPPER_DB`.`game_scores` (
     REFERENCES `GOG_SCRAPPER_DB`.`game_titles` (`title_sku`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = myisam;
 
 
 -- -----------------------------------------------------
@@ -64,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `GOG_SCRAPPER_DB`.`game_prices` (
     REFERENCES `GOG_SCRAPPER_DB`.`game_titles` (`title_sku`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = myisam;
 
 
 -- -----------------------------------------------------
@@ -80,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `GOG_SCRAPPER_DB`.`game_genres` (
     REFERENCES `GOG_SCRAPPER_DB`.`game_titles` (`title_sku`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = myisam;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

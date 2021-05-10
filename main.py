@@ -10,10 +10,16 @@ import config
 from game_scrapper import game_page_scrapper
 from import_urls import get_game_urls
 from mysql_writer import WebsiteDB
+from api_twitch import ApiTwitch
 
 if __name__ == '__main__':
 
-    list_of_games_dict = []  # list of all batches into MySQL
+    # Twitch API
+    """The new API Inegration"""
+    api = ApiTwitch()
+    call = api.api_twitch_to_mysql()
+
+    list_of_games_dict = []  # list of all batches into mysql_data_mining
     gog_url_partial, args = arguments_parser.filter_args()
 
     url_batch = []  # list of urls for grequests

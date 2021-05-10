@@ -195,6 +195,10 @@ After we finished collecting all games' URL, you'll start to see how the script 
 
 **arguments_parser.py** - parser arguments fro CLI to filter and direct the program.
 
+**api_twitch.py** - Downloads the top 1000 games from Twitch API.
+
+
+
 ## GIT HUB REPOSITORY
 https://github.com/MagenLahat/Data-mining.git
 
@@ -202,5 +206,4 @@ https://github.com/MagenLahat/Data-mining.git
 magat261@gmail.com
 
 roy.toled@gmail.com
-
 
