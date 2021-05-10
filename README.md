@@ -37,12 +37,11 @@ GOG scrapping for the given data:
 
 **-m**: selects whether to scrape through: 
 
------------**'everything'** - every game for sale in the website (default)
-	
+**'everything'** - every game for sale in the website (default)	
 
------------**'on_sale'** - games that are on a temporary discount
+**'on_sale'** - games that are on a temporary discount
 
------------**'new'** - games that were recently released
+**'new'** - games that were recently released
 
 **-p**: price filter: 
 

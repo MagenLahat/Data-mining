@@ -1,7 +1,6 @@
 import requests
 import json
 import config
-import pandas as pd
 from mysql_writer import WebsiteDB
 
 
