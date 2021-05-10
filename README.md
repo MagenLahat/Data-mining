@@ -10,30 +10,26 @@ and a vivid community of gamers.
 GOG scrapping for the given data:
 
 - game_title - The game title.
-
 - game_sku - The game stock keeping unit.
-
 - game_score - The score of the game, given by the gamers.
-
 - game_price_base - The base price in (USD).
-
 - game_price_final - The final price after discount (USD).
-
 - game_price_discount - The percentage of discount.
-
 - game_url - The URL of the specific game.
-
 - genre - List of game's genre.
-
 - works_on (supported operating systems) - i.e. macOS/Windows/Linux etc...
-
 - release_date - The game release data.
-
 - company - List of development & publishers of the game.
 
 
+
+**for common knowledge:**
+
+occasionally the scraper is getting blocked by the website, detecting that a machine is connecting to it, in this case a stale element reference is raised and will be printed to the screen, the scraper will reattempt and either it will skip the page indicating it's index number or it will cease to scrape and use the data that was scraped to this point. in any case it's not causing the program to crash.
+
+
 ### **CLI**
-**arguments**: -m, -p, -c
+**arguments**: -m, -p, -c, -d
 
 **-m**: selects whether to scrape through: 
 
@@ -45,7 +41,7 @@ GOG scrapping for the given data:
 
 **-p**: price filter: 
 
------------**'u5**',**'u10',** **'u15'** :  corresponds to games sold with 		prices under 5,10,15 usd
+-----------**'u5**',**'u10',** **'u15'** :  corresponds to games sold with prices under 5,10,15 usd
 
 -----------**'a25'** - games sold with price above 25 usd
 
@@ -61,6 +57,14 @@ GOG scrapping for the given data:
 
 -----------**'both'** - print the results to the screen and write them to the Data-Base
 
+**-d**: create database:
+
+---------**'yes'** - create the database
+
+---------**'no'** - do not create the database (default)
+
+
+
 ### **CLI examples:**
 
 <python3 main.py -m new -p u10 -c both> -> new games under 10 usd, prints both to screen and writes to the Data-Base
@@ -69,7 +73,10 @@ GOG scrapping for the given data:
 
 <python3 main.py -p free> -> scrapes through all the free games and writes them to the screen
 
+<python3 main.py -p free -d yes> -> scrapes through all the free games and writes them to the screen, create the database schema regardless
+
 ## Repository Prerequisites
+
 ### **Python Libraries**
 To Scrap the site, we had to use several external libraries, such as bs4 and Selenium. 
 You can find all the required libraries in the added requirements.txt file.
@@ -196,6 +203,31 @@ After we finished collecting all games' URL, you'll start to see how the script 
 
 **api_twitch.py** - Downloads the top 1000 games from Twitch API.
 
+**db_creator** - create the database schema and tables if the user pleases .
+
+## API
+
+We tested a Query between the game_titles and our new api source: twitch rankings. We found great matching after cleaning the title name (as the key).
+Our future plan for this source is to enrich our knowledge about the games.
+
+Some background:
+Twitch is the world's leading live streaming platform for gamers and the things we love. Watch and chat now with millions of other fans from around the world. (Twitch's website).
+
+Why we need Twitch:Goog old games (i.e. GOG), is part of the gaming store industry (opponnents: Epic Games (Fortnite) and Steam).
+We had a lack of knowledge about the popularity of those  titles. Therefore, we brought with the API connection new data about the popularity of 1,000 titles.
+
+It's important to understand, GOG is officially selling very old games. On the other side, we tested simple join between the two tables and we found great matching.
+
+**The logic of the API:**
+1. Importing new Token.
+2. By using that client id, secret code and Token, we connect to the developer area API.
+3. We decided to bring currently only the "top games" option. In the future we may consider to add more tables.
+4. Each record includes title id, name, clean name (for joining) and art work (of the box).
+5. The first record is 1st place, the 2nd place and so on... until 1000 samples.
+6. We will use it in our future Dashboards on AWS using some SQL magic to generate some cool insights.
+
+Good to know: Our script has the ability to re-try up to 3 times failures with the API on each loop (due to pagination).
+After the 3rd failure, our script will raise an Error about the error code. (2** - Success, all the rest is failure).
 
 
 ## GIT HUB REPOSITORY

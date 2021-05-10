@@ -23,7 +23,7 @@ if __name__ == '__main__':
     list_of_games_dict = []  # list of all batches into mysql_data_mining
     gog_url_partial, args = arguments_parser.filter_args()
 
-    if args.db == 'yes':
+    if args.db == 'yes': # creates the database schema if -d was chosen yes
         db_creator.create_db()
 
     url_batch = []  # list of urls for grequests

@@ -13,7 +13,11 @@ arguments:
 
           -c: users choice: 'screen' - print the results to the screen (default)
                             'db' - write the results to the Data-Bae
-                            'both' - print the results to the screen and write them to the Data-Bae
+                            'both' - print the results to the screen and write them to the Data-Base
+
+          -d: create database: 'yes' - create the database
+                               'no' - do not create the database (default)
+
 
 CLI examples: <python3 main.py -m new -p u10 -c both> -> new games under 10 usd, prints both to screen and writes to
              the Data-Base
