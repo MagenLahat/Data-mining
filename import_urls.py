@@ -24,8 +24,9 @@ def get_game_urls(gog_url):
     game_urls = []
     while index:
 
-        if index == 3:
-            break
+        # Ignore: for testing and QA.
+        # if index == 3:
+        #     break
 
         list_length = len(game_urls)
         driver.get(gog_url + str(index))
