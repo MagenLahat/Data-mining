@@ -24,6 +24,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/mysql_writer.py">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/scraper.py">
           <value>
             <Attribute>
