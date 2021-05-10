@@ -90,9 +90,10 @@ class ApiTwitch:
         empty_dict = 0
         max_pages_per_request = 100
         counter_pagination = 0
-        max_pages = 2
+        max_pages = 10
         pagination_response = "" # use for checking if we have additional page.
         top_games = []
+
         while counter_pagination != max_pages:
             api_response = self.__connection_attempts("get",
                             f"https://api.twitch.tv/helix/games/top?after={pagination_response}&first={max_pages_per_request}",
@@ -110,7 +111,6 @@ class ApiTwitch:
 
         # top_games = pd.DataFrame(top_games)
         top_games = self.__lower_case_twitch_game_names(top_games)
-
         return top_games
 
     def api_twitch_to_mysql(self):
@@ -124,11 +124,7 @@ class ApiTwitch:
             db.write_custom_query("DROP TABLE IF EXISTS gog_scrapper_db.twitch_rankings;")
             db.write_custom_query("""CREATE TABLE IF NOT EXISTS gog_scrapper_db.twitch_rankings 
                                      (id int, name varchar(255), clean_name varchar(50), standings int)
-                                     ENGINE=myisam
-                                     ;""")
-            # db.write_custom_query("""ALTER TABLE `gog_scrapper_db`.`twitch_rankings`
-            #                          CHANGE COLUMN `standings` `standings` INT NOT NULL ,
-            #                          ADD PRIMARY KEY (`standings`) ENGINE=myisam;""")
+                                     ENGINE=myisam;""")
             alfa = WebsiteDB(top_thousand_twitch_games)
             alfa.write_twitch_standings(top_thousand_twitch_games)
             print("Wrote Standings into DB")

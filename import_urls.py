@@ -9,8 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
 import os
 import config
-from bs4 import BeautifulSoup
-import requests
+
 
 
 def get_game_urls(gog_url):
