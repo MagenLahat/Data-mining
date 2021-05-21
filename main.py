@@ -32,15 +32,18 @@ if __name__ == '__main__':
         api = ApiTwitch()
         call = api.api_twitch_to_mysql()
 
-    if args.db == 'yes': # creates the database schema if -d was chosen yes
-        db_creator.create_db()
+    # if args.db == 'yes': # creates the database schema if -d was chosen yes
+    #     db_creator.create_db()
 
     url_batch = []  # list of urls for grequests
+    counter = 0
     for game_page in get_game_urls(gog_url_partial):
+        print(f"page counter {counter}")
+        counter += 1
         url_batch.append(game_page)
         if len(url_batch) == config.BATCH_SIZE:
             print("Batch Size is Full, writing to DB")
-            responses = (grequests.get(link, proxies=proxies) for link in url_batch)
+            responses = (grequests.get(link) for link in url_batch)
 
             for response in grequests.map(responses):
                 try:
