@@ -17,6 +17,11 @@ proxies = {'http': 'http://10.10.1.10:3128',
            'https': 'http://10.10.1.10:1080'}
 
 if __name__ == '__main__':
+    print("""
+            ***********************************
+            Good Old Games Scrapper has Started
+            ***********************************
+            """)
     list_of_games_dict = []  # list of all batches into mysql_data_mining
     gog_url_partial, args = arguments_parser.filter_args()
 
@@ -34,6 +39,7 @@ if __name__ == '__main__':
     for game_page in get_game_urls(gog_url_partial):
         url_batch.append(game_page)
         if len(url_batch) == config.BATCH_SIZE:
+            print("Batch Size is Full, writing to DB")
             responses = (grequests.get(link, proxies=proxies) for link in url_batch)
 
             for response in grequests.map(responses):
