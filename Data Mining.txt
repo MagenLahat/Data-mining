@@ -1,0 +1,16 @@
+
+git remote set-url origin git@github.com:MagenLahat/Data-mining.git
+
+git config --local user.name "Roy Toledano"
+
+git config  --local user.email roy.toled@gmail.com
+git config --local init.defaultBranch master
+
+git remote add production ubuntu@[your-server-ip]:/home/ubuntu/unicorn.git
+
+
+git remote set-url website roy.toled@gmail.com:path/to/repo
+
+
+git config  --local remote.origin.url https://github.com/MagenLahat/Data-mining.git
+
