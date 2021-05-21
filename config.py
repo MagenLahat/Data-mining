@@ -80,3 +80,7 @@ mysql_native_authentication = False
 # Twitch API
 API_CLIENT_ID = "honcjjterpsdgqkmbja3a1688oqnvp"
 API_CLIENT_SECRET = "8qmn61l90ny1k1nb2ujwtl9qujgvlt"
+
+# sms
+sms_api_key = "NTRkY2RlNWMwMTMzZjVjMWNmZTkwZTJjOTVhODEwYTE="
+sms_numbers = [972509666025]

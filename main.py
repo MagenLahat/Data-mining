@@ -13,6 +13,8 @@ from game_scrapper import game_page_scrapper
 from import_urls import get_game_urls
 from mysql_writer import WebsiteDB
 from api_twitch import ApiTwitch
+from SMS import sendSMS
+from datetime import datetime
 
 
 if __name__ == '__main__':
@@ -21,6 +23,8 @@ if __name__ == '__main__':
             Good Old Games Scrapper has Started
             ***********************************
             """)
+    sendSMS(f"Started SCRAPPING GOG AT {datetime.now()}")
+
     list_of_games_dict = []  # list of all batches into mysql_data_mining
     gog_url_partial, args = arguments_parser.filter_args()
 

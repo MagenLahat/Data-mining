@@ -54,6 +54,9 @@ def get_game_urls(gog_url):
             print(f'stale element reference raised for page {index}, skipping page...')
             index += 1
 
+        if index == 90:
+            break
+
         # except ConnectionRefusedError:
         #     print(f'connection refused error raised {index}, skipping page...')
         #     time.sleep(config.TEN_SECONDS)

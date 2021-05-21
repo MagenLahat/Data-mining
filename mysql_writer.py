@@ -63,6 +63,7 @@ class WebsiteDB:
     #     for line in open("create_db_GOG.sql"):
     #         self.cursor.execute(line, multi=True)
 
+
     def write_custom_query(self, query):
         """Writes custom query to the database (mysql)"""
         try:
