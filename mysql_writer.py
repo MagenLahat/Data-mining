@@ -40,11 +40,11 @@ class WebsiteDB:
                 password=config_file.mysql_password,
             )
 
-    # @property
+    @property
     def connection(self):
         return self._conn
 
-    # @property
+    @property
     def cursor(self):
         return self._cursor
 
