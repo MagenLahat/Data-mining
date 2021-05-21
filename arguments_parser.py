@@ -65,6 +65,10 @@ def filter_args():
                     no - don't create it, if you know it exists or from some other reason (default)
                     ''',
                         choices=['yes', 'no'], default='no')
+    parser.add_argument('-t', '--twitch', help= """
+    yes - Updates Twitch 1000 popular rankings into DB
+    no - Don't Update Twitch DB
+                                                """, choices=["yes", "no"], default="")
 
     args = parser.parse_args()
 
