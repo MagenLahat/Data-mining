@@ -74,7 +74,7 @@ MYSQL_HOST = "localhost"
 MYSQL_AUTH = 'mysql_native_password'
 # mysql_data_mining Connection Variables
 mysql_user = "root"
-mysql_password = "itc12345"
+mysql_password = "Itc12345!"
 mysql_native_authentication = False
 
 # Twitch API

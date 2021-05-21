@@ -33,11 +33,11 @@ occasionally the scraper is getting blocked by the website, detecting that a mac
 
 **-m**: selects whether to scrape through: 
 
-**'everything'** - every game for sale in the website (default)	
+----------**'everything'** - every game for sale in the website (default)	
 
-**'on_sale'** - games that are on a temporary discount
+----------**'on_sale'** - games that are on a temporary discount
 
-**'new'** - games that were recently released
+----------**'new'** - games that were recently released
 
 **-p**: price filter: 
 
@@ -203,7 +203,7 @@ After we finished collecting all games' URL, you'll start to see how the script 
 
 **api_twitch.py** - Downloads the top 1000 games from Twitch API.
 
-**db_creator** - create the database schema and tables if the user pleases .
+**db_creator** - creates the database schema and tables if the user pleases .
 
 ## API
 

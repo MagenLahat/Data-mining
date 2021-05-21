@@ -6,19 +6,26 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.options import Options
 from time import sleep
 import os
 import config
-
 
 
 def get_game_urls(gog_url):
     """
     Goes through the website pages and fetch all game urls
     :return: a list of all games urls
-    """
-
-    driver = webdriver.Chrome(os.path.join(os.getcwd(), config.CHROMEDRIVER_NAME))
+    """   
+    options = Options()
+    options.add_argument("start-maximized")
+    options.add_argument("--headless")
+    options.add_argument("--disable-gpu")
+    options.add_argument("--disable-extensions")
+    options.add_argument("--no-sandbox") 
+    service_args = ['--verbose']    
+    driver = webdriver.Chrome(os.path.join(os.getcwd(), config.CHROMEDRIVER_NAME), chrome_options=options, service_args=service_args)
+    
     index = config.FIRST_PAGE_INDEX
     game_urls = []
     while index:
@@ -40,6 +47,7 @@ def get_game_urls(gog_url):
                 href = elem.get_attribute(config.HREF)
                 if href is not None and href.startswith(config.GAMES_URL_PATH):
                     game_urls.append(href)
+                    # print("Here 1")
             index += 1
         except EC.StaleElementReferenceException:
             print(f'stale element reference raised for page {index}, skipping page...')

@@ -120,9 +120,9 @@ class ApiTwitch:
         # api = ApiTwitch()
         top_thousand_twitch_games = self.get_top_games()
         with WebsiteDB([]) as db:
-            db.write_custom_query("use gog_scrapper_db;")
-            db.write_custom_query("DROP TABLE IF EXISTS gog_scrapper_db.twitch_rankings;")
-            db.write_custom_query("""CREATE TABLE IF NOT EXISTS gog_scrapper_db.twitch_rankings 
+            db.write_custom_query("use GOG_SCRAPPER_DB;")
+            db.write_custom_query("DROP TABLE IF EXISTS GOG_SCRAPPER_DB.twitch_rankings;")
+            db.write_custom_query("""CREATE TABLE IF NOT EXISTS twitch_rankings 
                                      (id int, name varchar(255), clean_name varchar(50), standings int)
                                      ENGINE=myisam;""")
             alfa = WebsiteDB(top_thousand_twitch_games)

@@ -13,7 +13,6 @@ class WebsiteDB:
         self._data = list_of_games_data
         self._conn = self.__connect_to_db(config)
         self._cursor = self._conn.cursor()
-        # self.__justself.__create_new_db_if_not_exists()
 
     def __enter__(self):
         return self
@@ -30,7 +29,6 @@ class WebsiteDB:
                 host=config_file.MYSQL_HOST,
                 user=config_file.mysql_user,
                 password=config_file.mysql_password,
-                # database=config_file.MYSQL_DATABASE,
                 auth_plugin=config_file.MYSQL_AUTH
             )
         else:
@@ -38,7 +36,6 @@ class WebsiteDB:
                 host=config_file.MYSQL_HOST,
                 user=config_file.mysql_user,
                 password=config_file.mysql_password,
-                # database=config_file.MYSQL_DATABASE
             )
 
     @property
@@ -76,7 +73,7 @@ class WebsiteDB:
         """Writes to title table"""
         for game in list_of_dict:
             try:
-                sql = f"""INSERT INTO gog_scrapper_db.twitch_rankings
+                sql = f"""INSERT INTO GOG_SCRAPPER_DB.twitch_rankings
                                      (id, name, clean_name, Standings)
                                       VALUES(%s, %s, %s, %s)
                                 """
@@ -98,8 +95,8 @@ class WebsiteDB:
         """Writes to title table"""
         for game_title_dict in self._data:
             try:
-                sql = """INSERT INTO gog_scrapper_db.game_titles
-                             (  title_sku,
+                sql = """INSERT INTO GOG_SCRAPPER_DB.game_titles
+                               (title_sku,
                                 title_name,
                                 clean_title_name, 
                                 title_release_date,
@@ -137,7 +134,7 @@ class WebsiteDB:
             for genere_name in game_genres_dict[config.KEYNAME_GENRE]:
                 try:
                     sql = """INSERT INTO 
-                            gog_scrapper_db.game_genres(title_sku, genre_name)
+                            GOG_SCRAPPER_DB.game_genres(title_sku, genre_name)
                             VALUES(%s,%s) 
                              ON DUPLICATE KEY UPDATE 
                                 genre_name = VALUES(genre_name)             
@@ -152,7 +149,7 @@ class WebsiteDB:
         """Writes to game_prices"""
         for game_prices_dict in self._data:
             try:
-                sql = """INSERT INTO gog_scrapper_db.game_prices
+                sql = """INSERT INTO GOG_SCRAPPER_DB.game_prices
                              (title_sku, 
                              price_quote_datetime, 
                              price_base, 
@@ -176,7 +173,7 @@ class WebsiteDB:
         """
         for game_scores_dict in self._data:
             try:
-                sql = """INSERT INTO gog_scrapper_db.game_scores
+                sql = """INSERT INTO GOG_SCRAPPER_DB.game_scores
                              (title_sku, 
                              score_quote_datetime,
                              score)
