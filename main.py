@@ -71,5 +71,9 @@ if __name__ == '__main__':
                         db.write_game_scores()
                 except Exception as ex_message:
                     print(ex_message)
+
             list_of_games_dict.clear()
             url_batch.clear()
+
+    sms_resp = sendSMS(f"Finished SCRAPPING GOG AT {datetime.now()}")
+    print(sms_resp)
