@@ -6,11 +6,11 @@ Main File - Please run this file to start the script
 
 import arguments_parser
 import grequests
+import requests
 import config
 from game_scrapper import game_page_scrapper
 from import_urls import get_game_urls
 from mysql_writer import WebsiteDB
-import db_creator
 from api_twitch import ApiTwitch
 
 proxies = {'http': 'http://10.10.1.10:3128',
