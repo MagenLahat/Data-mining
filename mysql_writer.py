@@ -29,7 +29,8 @@ class WebsiteDB:
                 host=config_file.MYSQL_HOST,
                 user=config_file.mysql_user,
                 password=config_file.mysql_password,
-                auth_plugin=config_file.MYSQL_AUTH
+                auth_plugin=config_file.MYSQL_AUTH,
+
             )
         else:
             return mysql.connector.connect(
@@ -64,6 +65,7 @@ class WebsiteDB:
     def write_custom_query(self, query):
         """Writes custom query to the database (mysql)"""
         try:
+            self.cursor.execute("SET SESSION MAX_EXECUTION_TIME=9999")
             self.cursor.execute(query)
         except Exception:
             pass

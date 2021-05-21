@@ -38,7 +38,7 @@ if __name__ == '__main__':
     url_batch = []  # list of urls for grequests
     counter = 0
     for game_page in get_game_urls(gog_url_partial):
-        print(f"page counter {counter}")
+        print(f"game counter {counter}")
         counter += 1
         url_batch.append(game_page)
         if len(url_batch) == config.BATCH_SIZE:
