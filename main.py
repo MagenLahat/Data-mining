@@ -54,6 +54,7 @@ if __name__ == '__main__':
 
                     list_of_games_dict.append(game_data)
                 except Exception as ex_message:
+                    print("Issue 1")
                     print(ex_message)
 
             if args.choice == 'db' or args.choice == 'both':
