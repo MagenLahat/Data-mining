@@ -83,4 +83,4 @@ API_CLIENT_SECRET = "8qmn61l90ny1k1nb2ujwtl9qujgvlt"
 
 # sms
 sms_api_key = "NTRkY2RlNWMwMTMzZjVjMWNmZTkwZTJjOTVhODEwYTE="
-sms_numbers = [972509666025]
+sms_numbers = '972509666025'
