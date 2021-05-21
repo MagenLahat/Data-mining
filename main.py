@@ -8,6 +8,7 @@ import arguments_parser
 import grequests
 import db_creator
 import config
+import time
 from game_scrapper import game_page_scrapper
 from import_urls import get_game_urls
 from mysql_writer import WebsiteDB

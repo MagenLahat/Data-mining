@@ -7,7 +7,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
-from time import sleep
+import time
 import os
 import config
 
@@ -50,16 +50,16 @@ def get_game_urls(gog_url):
             print(f"Fetched games from page {index}")
             index += 1
         except EC.StaleElementReferenceException:
+            time.sleep(1)
             print(f'stale element reference raised for page {index}, skipping page...')
-            sleep(config.TEN_SECONDS)
             index += 1
 
-        except ConnectionRefusedError:
-            print(f'connection refused error raised {index}, skipping page...')
-            sleep(config.TEN_SECONDS)
-            index += 1
-        list(set(game_urls))
-        if len(game_urls) - list_length < 5:
-            break
+        # except ConnectionRefusedError:
+        #     print(f'connection refused error raised {index}, skipping page...')
+        #     time.sleep(config.TEN_SECONDS)
+        #     index += 1
+        # list(set(game_urls))
+        # if len(game_urls) - list_length < 5:
+        #     break
     driver.quit()
     return list(set(game_urls))

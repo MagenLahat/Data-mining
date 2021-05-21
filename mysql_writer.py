@@ -7,6 +7,7 @@ import config
 from datetime import datetime
 import re
 
+
 class WebsiteDB:
     def __init__(self, list_of_games_data=[]):
 
@@ -39,11 +40,11 @@ class WebsiteDB:
                 password=config_file.mysql_password,
             )
 
-    @property
+    # @property
     def connection(self):
         return self._conn
 
-    @property
+    # @property
     def cursor(self):
         return self._cursor
 
@@ -68,6 +69,7 @@ class WebsiteDB:
             self.cursor.execute("SET SESSION MAX_EXECUTION_TIME=9999")
             self.cursor.execute(query)
         except Exception:
+            print("issue  write_custom_query")
             pass
 
     def write_twitch_standings(self, list_of_dict):
@@ -80,6 +82,7 @@ class WebsiteDB:
                                       VALUES(%s, %s, %s, %s)
                                 """
                 val = (game["id"], game["name"], self.__clean_game_title(game["name"]), game["Standings"])
+                self.cursor.execute("SET SESSION MAX_EXECUTION_TIME=9999")
                 self.cursor.execute(sql, val)
                 self.commit()
             except Exception:
@@ -124,6 +127,7 @@ class WebsiteDB:
                        ', '.join(set(game_title_dict[config.KEYNAME_COMPANY])),
                        game_title_dict[config.KEYNAME_GAME_SIZE],
                        game_title_dict[config.KEYNAME_GAME_URL])
+                self.cursor.execute("SET SESSION MAX_EXECUTION_TIME=9999")
                 self.cursor.execute(sql, val)
             except Exception:
                 pass
@@ -143,6 +147,7 @@ class WebsiteDB:
                             """
                     val = (
                         game_genres_dict[config.KEYNAME_GAME_SKU], genere_name)
+                    self.cursor.execute("SET SESSION MAX_EXECUTION_TIME=9999")
                     self.cursor.execute(sql, val)
                 except Exception:
                     pass
@@ -165,6 +170,7 @@ class WebsiteDB:
                        game_prices_dict[config.KEYNAME_GMAE_FINAL_PRICE],
                        game_prices_dict[config.KEYNAME_GAME_DISCOUNT]
                        )
+                self.cursor.execute("SET SESSION MAX_EXECUTION_TIME=9999")
                 self.cursor.execute(sql, val)
             except Exception:
                 pass
@@ -185,6 +191,7 @@ class WebsiteDB:
                        datetime.now().strftime(config.DATETIME_FORMAT),
                        game_scores_dict[config.KEYNAME_GAME_SCORE]
                        )
+                self.cursor.execute("SET SESSION MAX_EXECUTION_TIME=9999")
                 self.cursor.execute(sql, val)
             except Exception:
                 pass

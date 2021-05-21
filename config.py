@@ -19,7 +19,7 @@ PAGE_TAG = '&page='
 # IMPORT_URLS CONSTANTS
 CHROMEDRIVER_NAME = 'chromedriver'
 BATCH_SIZE = 500
-TEN_SECONDS = 10
+TEN_SECONDS = 1
 MAIN_TAG = "a"
 HREF = 'HREF'
 GAMES_URL_PATH = "https://www.gog.com/game/"
