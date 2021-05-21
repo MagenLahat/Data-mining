@@ -53,7 +53,7 @@ class WebsiteDB:
 
     def close(self, commit=True):
         if commit:
-            self.commit()
+            self.connection.commit()
         self.connection.close()
 
     # def __create_new_db_if_not_exists(self):
