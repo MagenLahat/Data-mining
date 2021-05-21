@@ -47,7 +47,7 @@ def get_game_urls(gog_url):
                 href = elem.get_attribute(config.HREF)
                 if href is not None and href.startswith(config.GAMES_URL_PATH):
                     game_urls.append(href)
-                    # print("Here 1")
+            print(f"Fetched games from page {index}")
             index += 1
         except EC.StaleElementReferenceException:
             print(f'stale element reference raised for page {index}, skipping page...')

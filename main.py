@@ -6,15 +6,13 @@ Main File - Please run this file to start the script
 
 import arguments_parser
 import grequests
-import requests
+import db_creator
 import config
 from game_scrapper import game_page_scrapper
 from import_urls import get_game_urls
 from mysql_writer import WebsiteDB
 from api_twitch import ApiTwitch
 
-proxies = {'http': 'http://10.10.1.10:3128',
-           'https': 'http://10.10.1.10:1080'}
 
 if __name__ == '__main__':
     print("""
@@ -32,8 +30,8 @@ if __name__ == '__main__':
         api = ApiTwitch()
         call = api.api_twitch_to_mysql()
 
-    # if args.db == 'yes': # creates the database schema if -d was chosen yes
-    #     db_creator.create_db()
+    if args.db == 'yes': # creates the database schema if -d was chosen yes
+        db_creator.create_db()
 
     url_batch = []  # list of urls for grequests
     counter = 0
@@ -60,6 +58,7 @@ if __name__ == '__main__':
             if args.choice == 'db' or args.choice == 'both':
                 try:
                     with WebsiteDB(list_of_games_dict) as db:
+                        print("hi")
                         db.write_game_titles()
                         db.write_game_genres()
                         db.write_game_prices()
