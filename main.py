@@ -23,7 +23,8 @@ if __name__ == '__main__':
             Good Old Games Scrapper has Started
             ***********************************
             """)
-    sendSMS(f"Started SCRAPPING GOG AT {datetime.now()}")
+    sms_resp = sendSMS(f"Started SCRAPPING GOG AT {datetime.now()}")
+    print(sms_resp)
 
     list_of_games_dict = []  # list of all batches into mysql_data_mining
     gog_url_partial, args = arguments_parser.filter_args()
