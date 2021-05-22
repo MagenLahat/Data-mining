@@ -144,7 +144,8 @@ class WebsiteDB:
                             GOG_SCRAPPER_DB.game_genres(title_sku, genre_name)
                             VALUES(%s,%s) 
                              ON DUPLICATE KEY UPDATE 
-                                genre_name = VALUES(genre_name)             
+                             title_sku = VALUES(title_sku),
+                             genre_name = VALUES(genre_name)            
                             """
                     val = (
                         game_genres_dict[config.KEYNAME_GAME_SKU], genere_name)

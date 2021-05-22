@@ -15,7 +15,3 @@ def sendSMS(message):
     f = urllib.request.urlopen(request, data)
     fr = f.read()
     return (fr)
-
-
-# resp = sendSMS(message='This is your message')
-# print(resp)
